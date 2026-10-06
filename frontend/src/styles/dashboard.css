@@ -177,3 +177,100 @@
   color: #9ca3af;
   font-size: 13px;
 }
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 1024px) {
+    .dashboard-content {
+        padding: 28px;
+    }
+
+    .summary-cards {
+        flex-wrap: wrap;
+    }
+
+    .summary-card {
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    /* espaço extra embaixo para a barra de navegação */
+    .dashboard-content {
+        padding: 20px 16px 96px;
+    }
+
+    .dashboard-content h1 {
+        font-size: 22px;
+        margin-bottom: 26px;
+    }
+
+    .summary-cards {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .summary-card {
+        min-width: 0;
+        padding: 18px 20px;
+    }
+
+    .summary-card h2 {
+        font-size: 15px;
+        margin-bottom: 6px;
+        color: #9ca3af;
+    }
+
+    .summary-card p {
+        font-size: 24px;
+    }
+
+    .recent-transactions {
+        padding: 16px;
+    }
+
+    .section-header {
+        margin: 0 0 12px;
+    }
+
+    .section-header h2 {
+        font-size: 18px;
+    }
+
+    .transaction-dash-header {
+        display: none;
+    }
+
+    /* Descrição e data empilhadas à esquerda, valor à direita */
+    .transaction-item {
+        grid-template-columns: 1fr auto;
+        column-gap: 12px;
+        row-gap: 2px;
+        padding: 12px 0;
+        border-bottom-color: #1f2933;
+    }
+
+    .transaction-info {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .transaction-item .date {
+        grid-column: 1;
+        grid-row: 2;
+        margin: 0;
+        text-align: left;
+        font-size: 13px;
+        color: #9ca3af;
+    }
+
+    .transaction-item .value {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+}

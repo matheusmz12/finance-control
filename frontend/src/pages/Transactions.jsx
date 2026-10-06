@@ -1,5 +1,8 @@
 import "../styles/transactions.css";
 import NavBar from "../components/NavBar";
+import ConfirmDialog from "../components/ConfirmDialog";
+import Toast from "../components/Toast";
+import { useToast } from "../hooks/useToast";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import api from "../services/api";
@@ -27,6 +30,11 @@ function Transactions() {
 
   const [openMenu, setOpenMenu] = useState(null);
   const [editingTransaction, setEditingTransaction] = useState(null);
+
+  // Transação aguardando confirmação de exclusão
+  const [toDelete, setToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  const [toast, showToast] = useToast();
 
   const menuRef = useRef(null);
 
@@ -100,6 +108,7 @@ function Transactions() {
       }
 
       await loadTransactions();
+      showToast(editingTransaction ? "Transação atualizada" : "Transação criada");
       closeForm();
     } catch (error) {
       setFormErro(apiErrorMessage(error, "Não foi possível salvar a transação."));
@@ -108,24 +117,28 @@ function Transactions() {
     }
   }
 
-  // Função para deletar uma transação
-  async function handleDeleteTransaction(transactionId) {
-    const confirmDelete = window.confirm(
-      "Tem certeza de que deseja excluir esta transação?",
-    );
+  // Excluir: primeiro abre a janela de confirmação...
+  function askDelete(transaction) {
+    setOpenMenu(null);
+    setToDelete(transaction);
+  }
 
-    if (!confirmDelete) {
-      return;
-    }
-
+  // ...e só exclui depois que a pessoa confirma
+  async function confirmDelete() {
+    setDeleting(true);
     try {
-      await api.delete(`/transactions/${transactionId}`);
-      setOpenMenu(null);
+      await api.delete(`/transactions/${toDelete.id}`);
       await loadTransactions();
+      showToast("Transação excluída");
+      setToDelete(null);
     } catch (error) {
-      window.alert(apiErrorMessage(error, "Não foi possível excluir a transação."));
+      showToast(apiErrorMessage(error, "Não foi possível excluir a transação."), true);
+    } finally {
+      setDeleting(false);
     }
   }
+
+  const cancelDelete = useCallback(() => setToDelete(null), []);
 
   // Agrupa as transações por mês ("2026-10" -> [transações])
   const gruposTransacoes = transactions.reduce((grupos, transaction) => {
@@ -381,7 +394,7 @@ function Transactions() {
                                       <button
                                         title="Excluir"
                                         aria-label="Excluir"
-                                        onClick={() => handleDeleteTransaction(transaction.id)}
+                                        onClick={() => askDelete(transaction)}
                                       >
                                         <i className="bi bi-trash"></i>
                                       </button>
@@ -399,6 +412,22 @@ function Transactions() {
           )}
         </div>
       </main>
+
+      <ConfirmDialog
+        open={Boolean(toDelete)}
+        danger
+        title="Excluir transação?"
+        message={
+          toDelete &&
+          `"${toDelete.description}" de ${formatCurrency(toDelete.amount)} em ${formatDate(toDelete.date)} será excluída. Essa ação não pode ser desfeita.`
+        }
+        confirmLabel="Excluir"
+        loading={deleting}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+      />
+
+      <Toast toast={toast} />
     </div>
   );
 }

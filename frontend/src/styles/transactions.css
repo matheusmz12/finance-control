@@ -394,3 +394,161 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+/* ---------- Responsivo (vale também para Categorias e Perfil) ---------- */
+
+@media (max-width: 1024px) {
+  .transactions-content {
+    padding: 28px;
+  }
+
+  .month-summary-values {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .title-transactions span:nth-child(2),
+  .transaction-category,
+  .title-transactions span:nth-child(5),
+  .transaction-value {
+    width: 120px;
+  }
+
+  .title-transactions span:nth-child(3),
+  .transaction-date {
+    width: 100px;
+  }
+
+  /* menu de ações abre para a esquerda, sem sair da tela */
+  .transaction-actions {
+    left: auto;
+    right: 44px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .transactions-container {
+    flex-direction: column;
+  }
+
+  /* espaço extra embaixo para a barra de navegação */
+  .transactions-content {
+    padding: 20px 16px 96px;
+  }
+
+  .transactions-header {
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .transactions-header .titulo {
+    align-items: flex-start;
+  }
+
+  .transactions-header .titulo h1 {
+    font-size: 26px;
+  }
+
+  .transactions-header .titulo p {
+    margin-top: 0;
+    font-size: 15px;
+    color: #9ca3af;
+  }
+
+  .month-summary-values {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .month-summary-values h2 {
+    font-size: 20px;
+  }
+
+  .month-summary-values .month-summary {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .month-summary-values .month-summary span {
+    font-size: 13px;
+  }
+
+  .title-transactions {
+    display: none;
+  }
+
+  /* Cada transação vira um cartão: descrição e valor em cima, categoria e data embaixo */
+  .transaction-row {
+    display: grid;
+    grid-template-columns: 1fr auto 32px;
+    grid-template-areas:
+      "desc value menu"
+      "cat date menu";
+    column-gap: 10px;
+    row-gap: 4px;
+    margin-bottom: 6px;
+  }
+
+  .transaction-description {
+    grid-area: desc;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .transaction-category,
+  .transaction-date {
+    width: auto;
+    font-size: 13px;
+    color: #9ca3af;
+  }
+
+  .transaction-category {
+    grid-area: cat;
+    text-align: left;
+  }
+
+  .transaction-date {
+    grid-area: date;
+    text-align: right;
+  }
+
+  /* o sinal e a cor do valor já mostram se é receita ou despesa */
+  .transaction-type {
+    display: none;
+  }
+
+  .transaction-value {
+    grid-area: value;
+    width: auto;
+  }
+
+  .transaction-menu-button {
+    grid-area: menu;
+    width: 32px;
+    height: 32px;
+  }
+
+  .transaction-actions {
+    right: 40px;
+  }
+
+  .transaction-actions button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .transaction-form {
+    padding: 20px;
+    gap: 14px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .transaction-form-buttons button {
+    flex: 1;
+  }
+}

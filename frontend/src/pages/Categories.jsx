@@ -1,6 +1,9 @@
 import "../styles/transactions.css";
 import "../styles/categories.css";
 import NavBar from "../components/NavBar";
+import ConfirmDialog from "../components/ConfirmDialog";
+import Toast from "../components/Toast";
+import { useToast } from "../hooks/useToast";
 import { useCallback, useEffect, useState } from "react";
 
 import api from "../services/api";
@@ -65,6 +68,12 @@ function Categories() {
   const [editingName, setEditingName] = useState("");
   const [mensagem, setMensagem] = useState({ text: "", error: false });
 
+  // Categoria aguardando confirmação de exclusão
+  const [toDelete, setToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  const [toast, showToast] = useToast();
+  const cancelDelete = useCallback(() => setToDelete(null), []);
+
   const loadCategories = useCallback(() => {
     return api.get("/categories").then((response) => setCategories(response.data));
   }, []);
@@ -124,14 +133,18 @@ function Categories() {
     }
   }
 
-  async function handleDelete(category) {
-    if (!window.confirm(`Excluir a categoria "${category.name}"?`)) return;
+  async function confirmDelete() {
+    setDeleting(true);
     try {
-      await api.delete(`/categories/${category.id}`);
+      await api.delete(`/categories/${toDelete.id}`);
       await loadCategories();
-      showMessage("Categoria excluída.");
+      showToast("Categoria excluída");
     } catch (error) {
-      showMessage(apiErrorMessage(error, "Não foi possível excluir a categoria."), true);
+      // Ex.: categoria ainda usada em transações
+      showToast(apiErrorMessage(error, "Não foi possível excluir a categoria."), true);
+    } finally {
+      setDeleting(false);
+      setToDelete(null);
     }
   }
 
@@ -247,7 +260,7 @@ function Categories() {
                         >
                           <i className="bi bi-pencil"></i>
                         </button>
-                        <button type="button" title="Excluir" aria-label="Excluir" onClick={() => handleDelete(category)}>
+                        <button type="button" title="Excluir" aria-label="Excluir" onClick={() => setToDelete(category)}>
                           <i className="bi bi-trash"></i>
                         </button>
                       </>
@@ -268,6 +281,19 @@ function Categories() {
           </div>
         </section>
       </main>
+
+      <ConfirmDialog
+        open={Boolean(toDelete)}
+        danger
+        title="Excluir categoria?"
+        message={toDelete && `A categoria "${toDelete.name}" será excluída. Essa ação não pode ser desfeita.`}
+        confirmLabel="Excluir"
+        loading={deleting}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+      />
+
+      <Toast toast={toast} />
     </div>
   );
 }

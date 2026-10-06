@@ -245,3 +245,26 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 768px) {
+  .month-picker {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .category-panel {
+    padding: 18px;
+  }
+
+  .category-panel-header h2 {
+    font-size: 17px;
+  }
+
+  .category-list li {
+    flex-wrap: wrap;
+  }
+
+  .category-type {
+    display: none;
+  }
+}

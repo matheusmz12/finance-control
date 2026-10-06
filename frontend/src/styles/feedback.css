@@ -1,0 +1,172 @@
+/* Janela de confirmação e avisos (ConfirmDialog e Toast) */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  z-index: 1000;
+}
+
+.confirm-dialog {
+  width: 100%;
+  max-width: 400px;
+  padding: 28px;
+  background-color: #14191d;
+  border: 1px solid #1f2933;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  text-align: center;
+  animation: dialog-in 0.18s ease-out;
+}
+
+.confirm-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background-color: #22c55e1a;
+  color: #22c55e;
+  font-size: 22px;
+}
+
+.confirm-icon.is-danger {
+  background-color: #ef44441a;
+  color: #ef4444;
+}
+
+.confirm-dialog h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.confirm-dialog p {
+  color: #9ca3af;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.confirm-buttons button {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirm-buttons button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.btn-secondary {
+  background-color: #1f2937;
+  color: #e5e7eb;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #374151;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+.btn-primary {
+  background-color: #22c55e;
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #16a34a;
+}
+
+.confirm-buttons button:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+/* Aviso no canto */
+.toast-region {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1100;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background-color: #14191d;
+  border: 1px solid #22c55e55;
+  color: #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  animation: toast-in 0.2s ease-out;
+}
+
+.toast i {
+  color: #22c55e;
+  font-size: 18px;
+}
+
+.toast.is-error {
+  border-color: #ef444455;
+}
+
+.toast.is-error i {
+  color: #ef4444;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* No celular o aviso fica acima da barra de navegação inferior */
+@media (max-width: 768px) {
+  .toast-region {
+    left: 16px;
+    right: 16px;
+    bottom: 84px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confirm-dialog,
+  .toast {
+    animation: none;
+  }
+}

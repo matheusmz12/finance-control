@@ -1,8 +1,13 @@
 .navBar {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    flex-shrink: 0;
     width: 240px;
-    min-height: 100vh;
+    height: 100vh;
     padding: 30px 20px;
     background-color: #111827;
+    z-index: 50;
 }
 
 .navBar-logo {
@@ -10,32 +15,37 @@
 }
 
 .navBar-logo h2 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     color: #ffffff;
     font-size: 22px;
     margin: 0;
+    white-space: nowrap;
 }
 
-.navBar-logo h2 span,
-.navBar-logo h2 i
- {
+.navBar-logo h2 span span,
+.navBar-logo h2 i {
     color: #22c55e;
 }
-
 
 .navBar-links {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 100px);
+    height: calc(100% - 70px);
     gap: 15px;
 }
 
 .navBar-links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     color: #9ca3af;
     text-decoration: none;
     font-size: 16px;
     padding: 12px;
     border-radius: 8px;
-    transition: ease-in-out 0.3s;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .navBar-links a.active {
@@ -48,24 +58,107 @@
     color: #ffffff;
 }
 
-.btn-sair{
+.btn-sair {
     margin-top: auto;
 }
 
 .btn-sair button {
     display: flex;
+    align-items: center;
     gap: 10px;
+    width: 100%;
     color: #9ca3af;
     border: none;
     background-color: transparent;
+    font: inherit;
     font-size: 16px;
     padding: 12px;
     border-radius: 8px;
-    transition: ease-in-out 0.3s;
+    transition: background-color 0.2s, color 0.2s;
     cursor: pointer;
 }
 
 .btn-sair button:hover {
     background-color: #3448712c;
     color: #ffffff;
+}
+
+/* ---------- Tablet: barra lateral só com ícones ---------- */
+@media (max-width: 1024px) {
+    .navBar {
+        width: 76px;
+        padding: 24px 12px;
+    }
+
+    .navBar-logo {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    .navBar-logo h2 {
+        justify-content: center;
+        font-size: 26px;
+    }
+
+    .navBar-logo-text,
+    .nav-label {
+        display: none;
+    }
+
+    .navBar-links a,
+    .btn-sair button {
+        justify-content: center;
+        font-size: 20px;
+    }
+}
+
+/* ---------- Celular: barra de abas embaixo ---------- */
+@media (max-width: 768px) {
+    .navBar {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+        border-top: 1px solid #1f2933;
+    }
+
+    .navBar-logo {
+        display: none;
+    }
+
+    .navBar-links {
+        flex-direction: row;
+        justify-content: space-around;
+        height: auto;
+        gap: 4px;
+    }
+
+    .navBar-links a,
+    .btn-sair button {
+        flex: 1;
+        flex-direction: column;
+        gap: 2px;
+        padding: 8px 4px;
+        font-size: 20px;
+    }
+
+    .btn-sair {
+        flex: 1;
+        margin-top: 0;
+    }
+
+    .nav-label {
+        display: block;
+        font-size: 11px;
+    }
+
+    .navBar-links a.active,
+    .navBar-links a:hover {
+        background-color: transparent;
+        color: #22c55e;
+    }
 }
