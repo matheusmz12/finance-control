@@ -1,0 +1,17 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente (senhas e segredos: NUNCA vão para o GitHub)
+.env
+.env.local
+
+# Builds
+dist/
+dist-ssr/
+
+# Logs e arquivos do sistema/editor
+*.log
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea

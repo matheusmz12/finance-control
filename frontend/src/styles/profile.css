@@ -1,0 +1,79 @@
+/* Página de Perfil (usa a base de transactions.css e os painéis de categories.css) */
+
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #22c55e1a;
+  border: 2px solid #22c55e;
+  color: #22c55e;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.profile-hero h2 {
+  font-size: 22px;
+}
+
+.profile-hero p {
+  margin-top: 4px;
+  color: #9ca3af;
+}
+
+.profile-hero small {
+  display: block;
+  margin-top: 6px;
+  color: #64748b;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 32px;
+  margin-left: auto;
+}
+
+.profile-stats dt {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.profile-stats dd {
+  margin-top: 4px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-form h2 {
+  font-size: 20px;
+}
+
+.profile-form .add-transaction-button {
+  align-self: flex-start;
+}
+
+@media (max-width: 1000px) {
+  .profile-hero {
+    flex-wrap: wrap;
+  }
+
+  .profile-stats {
+    margin-left: 0;
+    width: 100%;
+  }
+}

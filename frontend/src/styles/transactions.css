@@ -1,0 +1,396 @@
+/* Container Principal */
+
+.transactions-container {
+  min-height: 100vh;
+  display: flex;
+  background-color: #0c1015;
+  color: white;
+}
+
+.transactions-content {
+  flex: 1;
+  padding: 40px;
+}
+
+
+/* Cabeçalho das Transações */
+
+.transactions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.transactions-header .titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.transactions-header .titulo h1 {
+  margin: 0;
+  color: #22c55e;
+}
+
+.transactions-header .titulo p {
+  margin-top: 8px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+
+/* Botão de Nova Transação */
+
+.add-transaction-button {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: #22c55e;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-transaction-button:hover {
+  background-color: #16a34a;
+}
+
+/* Overlay do Modal */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Formulário de Transação */
+
+.transaction-form {
+  width: 90%;
+  max-width: 500px;
+  padding: 30px;
+  background-color: #14191d;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.transaction-form h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+/* Grupo de Campos */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #0f172a;
+  color: #ffffff;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #22c55e;
+  box-shadow:
+    0 0 0 3px rgba(34, 197, 94, 0.12);
+}
+
+/* Botões do Formulário */
+
+.transaction-form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.transaction-form button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.transaction-form button[type="button"] {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.transaction-form button[type="button"]:hover {
+  background-color: #d1d5db;
+}
+
+.transaction-form button[type="submit"] {
+  background-color: #22c55e;
+  color: #ffffff;
+}
+
+.transaction-form button[type="submit"]:hover {
+  background-color: #16a34a;
+}
+
+
+/* classe das transações e valor */
+
+.entrada {
+  color: #22c55e;
+  /* background-color: #22c55e1a; */
+  padding: 4px 8px;
+}
+
+.saida {
+  color: #ef4444;
+  /* background-color: #ef44441a; */
+  padding: 4px 8px;
+}
+
+
+.valorEntrada {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.valorSaida {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+/* Resumo do Mês */
+
+.month-summary-values {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+  justify-content: space-between;
+}
+
+.month-summary-values .month-summary {
+  display: flex;
+  gap: 20px;
+}
+
+
+.month-summary-values .month-summary .month-summary-receitas {
+  color: #22c55e;
+  font-weight: bold;
+  background-color: #22c55e1a;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.month-summary-values .month-summary .month-summary-despesas {
+  color: #ef4444;
+  font-weight: bold;
+  background-color: #ef44441a;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.month-summary-values .month-summary .month-summary-saldo {
+  color: #3b82f6;
+  font-weight: bold;
+  background-color: #3b82f61a;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+
+/* Lista de Transações */
+
+.transactions-list>ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.transactions-list>ul>li {
+  margin-bottom: 30px;
+}
+
+.transactions-list>ul>li>h2 {
+  margin-bottom: 8px;
+}
+
+/* Cabeçalho das Transações */
+
+.title-transactions {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  position: relative;
+}
+
+/* Descrição */
+
+.title-transactions span:first-child {
+  flex: 1;
+}
+
+/* Categoria */
+
+.title-transactions span:nth-child(2) {
+  width: 150px;
+  text-align: center;
+}
+
+/* Data */
+/* Tipo */
+
+.title-transactions span:nth-child(3),
+.title-transactions span:nth-child(4) {
+  width: 120px;
+  text-align: center;
+}
+
+
+/* Valor */
+
+.title-transactions span:nth-child(5) {
+  width: 150px;
+  text-align: center;
+}
+
+/* Linha da Transação */
+.transactions-list>ul>li>ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.transaction-row {
+  padding: 12px;
+  margin-bottom: 2px;
+  background-color: #0f172a;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.transaction-description {
+  flex: 1;
+}
+
+.transaction-category {
+  width: 120px;
+  text-align: center;
+}
+
+.transaction-date {
+  width: 130px;
+  text-align: center;
+}
+
+.transaction-type {
+  width: 80px;
+  text-align: center;
+}
+
+.transaction-value {
+  width: 150px;
+  text-align: right;
+}
+
+/* botao do menu */
+
+.transaction-menu-button {
+  width: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+/* Ações da Transação editar e excluir */
+
+.transaction-actions {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  left: 95%;
+  top: -50%;
+  padding: 8px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+}
+
+.transaction-actions button {
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.transaction-actions button:hover {
+  background-color: #f1f5f9;
+}
+/* Mensagens de erro e sucesso dos formulários */
+
+.form-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #fca5a5;
+  background-color: #ef44441a;
+  font-size: 14px;
+}
+
+.form-success {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #86efac;
+  background-color: #22c55e1a;
+  font-size: 14px;
+}
+
+.transaction-form button:disabled,
+.transaction-form select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
